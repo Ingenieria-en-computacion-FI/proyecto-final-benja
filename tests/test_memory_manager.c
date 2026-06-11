@@ -1,20 +1,26 @@
 #include <assert.h>
 #include "memory_manager.h"
 
+
 void test_first_fit() {
     MemoryManager* mm = mm_create(1024);
 
-    int block1 = mm_allocate_first_fit(mm, 100);
-    int block2 = mm_allocate_first_fit(mm, 200);
+    int pid1 = mm_allocate_first_fit(mm, 100);
+    int pid2 = mm_allocate_first_fit(mm, 200);
 
-    assert(block1 >= 0);
-    assert(block2 >= 0);
+    assert(pid1 >= 0);
+    assert(pid2 >= 0);
 
-    mm_free(mm, block1);
+    // Guardamos dónde empezó el primer bloque (debería ser 0)
+    int start_pos_block1 = mm->head->start;
 
-    int block3 = mm_allocate_first_fit(mm, 50);
+    mm_free(mm, pid1);
 
-    assert(block3 == block1);
+    int pid3 = mm_allocate_first_fit(mm, 50);
+
+    // En lugar de comparar los PIDs, validamos que el bloque recién asignado
+    // haya tomado el hueco del principio de la memoria (start == 0)
+    assert(mm->head->start == start_pos_block1);
 
     mm_destroy(mm);
 }

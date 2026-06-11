@@ -11,7 +11,7 @@ SRC_ALGO   = src/algorithms/brute_force.c src/algorithms/greedy.c \
              src/algorithms/dp_bottomup.c src/algorithms/dp_topdown.c \
              src/algorithms/incremental.c
 SRC_DS     = src/stack.c src/queue.c src/circular_queue.c \
-             src/linked_list.c src/doubly_linked_list.c
+             src/linked_list.c src/doubly_linked_list.c src/scheduler.c
 SRC_UTILS  = src/utils/logger.c src/utils/timer.c src/utils/parser.c
 SRC_MAIN   = src/main.c
 
